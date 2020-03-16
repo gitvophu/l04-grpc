@@ -1,3 +1,9 @@
+#Kết nối database
+HOST: 192.168.1.27
+USERNAME: root
+PASS: Phuvo04@#
+DBNAME: test_db
+
 ----------Quản lý user-----------
 1. Thêm mới
     ***Request 
