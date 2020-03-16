@@ -34,7 +34,18 @@ DBNAME: test_db
             0: Xảy ra lỗi, lấy danh sách thất bại
             1000: Xóa user thành công 
         - message: (message thông báo)
-
+4. Lấy thông tin 1 user
+    ***Request
+        - id: int|required (id của user cần xóa)
+    ***Response 
+        - id: int (id của user được xóa)
+        - code: (mã code trạng thái trả về)
+            0: Xảy ra lỗi, lấy danh sách thất bại
+            1000: Xóa user thành công 
+        - message: (message thông báo)
+        - name: string (tên user)
+        - age: int (tuổi user)
+        - email: string (email user)
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ----------Quản lý Nhà phân phối-----------
@@ -67,3 +78,15 @@ DBNAME: test_db
             0: Xảy ra lỗi, lấy danh sách thất bại
             1000: Xóa Nhà phân phối thành công 
         - message: (message thông báo)
+4. Lấy thông tin 1 npp
+    ***Request
+        - id: int|required (id của npp cần xóa)
+    ***Response 
+        - id: int (id của npp được xóa)
+        - code: (mã code trạng thái trả về)
+            0: Xảy ra lỗi, lấy danh sách thất bại
+            1000: Xóa npp thành công 
+        - message: (message thông báo)
+        - name: string (tên npp)
+        - age: int (tuổi npp)
+        - email: string (email npp)

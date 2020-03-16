@@ -31,15 +31,16 @@ service Greeter {
   rpc AddProduct(AddProductRequest) returns (AddProductResponse){}
   rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse){}
   rpc ShowProduct(ShowProductRequest) returns (ShowProductResponse){}
+
   rpc AddUser(AddUserRequest) returns (AddUserResponse){}
   rpc GetUserList(GetUserListRequest) returns (GetUserListResponse){}
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse){}
-
+  rpc ShowUser(ShowUserRequest) returns (ShowUserResponse){}
 
   rpc AddNpp(AddNppRequest) returns (AddNppResponse){}
   rpc GetNppList(GetNppListRequest) returns (GetNppListResponse){}
   rpc DeleteNpp(DeleteNppRequest) returns (DeleteNppResponse){}
-  
+  rpc ShowNpp(ShowNppRequest) returns (ShowNppResponse){}
   
 }
 
@@ -123,7 +124,17 @@ message DeleteUserResponse{
   string code = 2;
   string message = 3;
 }
-
+message ShowUserRequest{
+  string id = 1;
+}
+message ShowUserResponse{
+  string code = 1;
+  string message = 2;
+  string id = 3;
+  string name = 4;
+  string age = 5;
+  string email = 6;
+}
 // quan ly NPP ----------------------------------------------
 message AddNppRequest{
   string id = 1;
@@ -150,6 +161,18 @@ message DeleteNppResponse{
   string id = 1;
   string code = 2;
   string message = 3;
+}
+
+message ShowNppRequest{
+  string id = 1;
+}
+message ShowNppResponse{
+  string code = 1;
+  string message = 2;
+  string id = 3;
+  string name = 4;
+  string age = 5;
+  string email = 6;
 }
 //update
 // message UpdateProductRequest{

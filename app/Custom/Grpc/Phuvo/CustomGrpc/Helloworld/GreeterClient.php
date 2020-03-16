@@ -164,6 +164,19 @@ class GreeterClient extends \Grpc\BaseStub {
     }
 
     /**
+     * @param \Phuvo\CustomGrpc\Helloworld\ShowUserRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function ShowUser(\Phuvo\CustomGrpc\Helloworld\ShowUserRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/ShowUser',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\ShowUserResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * @param \Phuvo\CustomGrpc\Helloworld\AddNppRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -199,6 +212,19 @@ class GreeterClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/DeleteNpp',
         $argument,
         ['\Phuvo\CustomGrpc\Helloworld\DeleteNppResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\ShowNppRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function ShowNpp(\Phuvo\CustomGrpc\Helloworld\ShowNppRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/ShowNpp',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\ShowNppResponse', 'decode'],
         $metadata, $options);
     }
 
