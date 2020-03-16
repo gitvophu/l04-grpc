@@ -124,4 +124,82 @@ class GreeterClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\AddUserRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function AddUser(\Phuvo\CustomGrpc\Helloworld\AddUserRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/AddUser',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\AddUserResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\GetUserListRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetUserList(\Phuvo\CustomGrpc\Helloworld\GetUserListRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/GetUserList',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\GetUserListResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\DeleteUserRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteUser(\Phuvo\CustomGrpc\Helloworld\DeleteUserRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/DeleteUser',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\DeleteUserResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\AddNppRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function AddNpp(\Phuvo\CustomGrpc\Helloworld\AddNppRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/AddNpp',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\AddNppResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\GetNppListRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetNppList(\Phuvo\CustomGrpc\Helloworld\GetNppListRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/GetNppList',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\GetNppListResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\DeleteNppRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteNpp(\Phuvo\CustomGrpc\Helloworld\DeleteNppRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/DeleteNpp',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\DeleteNppResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

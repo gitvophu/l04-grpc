@@ -31,6 +31,16 @@ service Greeter {
   rpc AddProduct(AddProductRequest) returns (AddProductResponse){}
   rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse){}
   rpc ShowProduct(ShowProductRequest) returns (ShowProductResponse){}
+  rpc AddUser(AddUserRequest) returns (AddUserResponse){}
+  rpc GetUserList(GetUserListRequest) returns (GetUserListResponse){}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse){}
+
+
+  rpc AddNpp(AddNppRequest) returns (AddNppResponse){}
+  rpc GetNppList(GetNppListRequest) returns (GetNppListResponse){}
+  rpc DeleteNpp(DeleteNppRequest) returns (DeleteNppResponse){}
+  
+  
 }
 
 // The request message containing the user's name.
@@ -84,6 +94,62 @@ message ShowProductResponse{
   string id = 3;
   string name = 4;
   string price = 5;
+}
+
+// quan ly user----------------------------------------------
+message AddUserRequest{
+  string id = 1;
+  string name = 2;
+  string age = 3;
+  string email = 4;
+}
+message AddUserResponse{
+  string code = 1;
+  string message = 2;
+  string id = 3;
+}
+message GetUserListRequest{
+}
+message GetUserListResponse{
+  string code = 1;
+  string message = 2;
+}
+// DELETE user
+message DeleteUserRequest{
+  string id = 1;
+}
+message DeleteUserResponse{
+  string id = 1;
+  string code = 2;
+  string message = 3;
+}
+
+// quan ly NPP ----------------------------------------------
+message AddNppRequest{
+  string id = 1;
+  string name = 2;
+  string age = 3;
+  string email = 4;
+}
+message AddNppResponse{
+  string code = 1;
+  string message = 2;
+  string id = 3;
+}
+message GetNppListRequest{
+}
+message GetNppListResponse{
+  string code = 1;
+  string message = 2;
+}
+// DELETE user
+message DeleteNppRequest{
+  string id = 1;
+}
+message DeleteNppResponse{
+  string id = 1;
+  string code = 2;
+  string message = 3;
 }
 //update
 // message UpdateProductRequest{
