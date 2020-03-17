@@ -49,15 +49,17 @@
 	                            {
 	                            	var tr = null;
 	                            	var td = null;
+	                            	var button = null;
 	                                if(data.flag)
 	                                {
 	                                	if(cmd === 'capnhat')
 	                                	{
-	                                		var tr = $('#tbody_id_users').children('[data-button-userId="' + $this.attr('data-button-userId') + '"]');
-			                            	var td = tr.children();
-	                                		td.eq(2).html(tenNguoiDung);
-	                                		td.eq(3).html(tuoi);
-	                                		td.eq(4).html(email);
+	                                		button = $('#tbody_id_users').children().find('[data-button-userId="' + $this.attr('data-button-userId') + '"][data-button-id="btnSua"]');
+			                            	tr = button.parent().closest('tr');
+			                            	td = tr.children();
+	                                		td.eq(2).text(tenNguoiDung);
+	                                		td.eq(3).text(tuoi);
+	                                		td.eq(4).text(email);
 	                                		$('[data-button-id="btnXoa"][data-button-userId="' + $this.attr('data-button-userId') + '"]').attr('data-button-userName', tenNguoiDung);
 	                                	}
 	                                	else

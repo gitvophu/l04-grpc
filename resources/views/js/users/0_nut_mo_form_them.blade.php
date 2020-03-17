@@ -10,6 +10,7 @@
 						$('#numTuoi').val('');
 						$('#txtEmail').val('');
 						$('#btnThemOrCapNhat').attr('data-button-command','them');
+						$('#btnThemOrCapNhat').text('Thêm');
 						$('#formTitle').text('Thêm người dùng mới');
 						$('#frmUsers').slideDown(800);
 						return true;

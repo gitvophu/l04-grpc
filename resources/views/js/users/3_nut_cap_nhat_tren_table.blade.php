@@ -13,7 +13,7 @@
 	                    $.ajax({
 	                        type: 'POST',
 	                        dataType : 'JSON',
-	                        url: '{{route("layThongTinCapNhat"}}',
+	                        url: '{{route("layThongTinCapNhat")}}',
 	                        xhr: function(){return $.ajaxSettings.xhr();},
 	                        cache: false,
 	                        contentType: false,
@@ -30,6 +30,7 @@
 	                                    $('#txtEmail').val(data.user.email);
 	                                    $('#btnThemOrCapNhat').attr('data-button-userId', id);
 	                                    $('#btnThemOrCapNhat').attr('data-button-command','capnhat');
+	                                    $('#btnThemOrCapNhat').text('Cập nhật');
 	                                    $('#formTitle').text('Cập nhật thông tin người dùng');
 	                                    $('#frmUsers').slideDown(800);
 	                                }
