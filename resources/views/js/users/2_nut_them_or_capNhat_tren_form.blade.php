@@ -37,7 +37,7 @@
         				$.ajax({
         					type: 'POST',
         					dataType: 'JSON',
-	                        url: url,
+	                        url: _url,
 	                        xhr: function(){return $.ajaxSettings.xhr();},
 	                        cache: false,
 	                        contentType: false,
