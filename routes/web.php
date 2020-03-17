@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'TestController@getListProduct')->name('listProduct');
 Route::get('/products', 'TestController@getListProduct')->name('listProduct');
 Route::post('/add-product/{id?}', 'TestController@addProduct')->name('addProduct');
 Route::get('/add-product-view/{id?}', 'TestController@addProductView')->name('addProductView');
