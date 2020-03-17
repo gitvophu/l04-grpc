@@ -8,7 +8,6 @@ use Phuvo\CustomGrpc\Helloworld\HelloRequest;
 
 class userController extends Controller
 {
-    protected $view_data = [];
     const API_HOST = '192.168.1.27:50051';
 
     public function layDanhSachNguoiDung()
