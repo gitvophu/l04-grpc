@@ -20,8 +20,8 @@
 
         				if(tenNguoiDung.length > 64 || !tenNguoiDung)
         					throw new TypeError('Tên người dùng không được rỗng và phải có độ dài nhỏ hơn 64 ký tự!');
-        				if(!tuoi || isNaN(tuoi))
-        					throw new TypeError('Tuổi không được rỗng và phải là số nguyên dương!');
+        				if(!tuoi || isNaN(tuoi) || (!isNaN(tuoi) && (tuoi < 18 || tuoi > 70)))
+        					throw new TypeError('Tuổi không được rỗng và phải là số nguyên dương lớn hơn bằng 18 và nhỏ hơn bằng 70!');
         				if(!checkEmail(email))
         					throw new TypeError('Email không được rỗng và phải hợp lệ!');
         				formData = new FormData();
