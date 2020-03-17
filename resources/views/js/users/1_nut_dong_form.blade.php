@@ -6,7 +6,7 @@
 				$('#btnDong').on('click', function(){
 					try
         			{
-        				$('#frmUsers').slideDown(800);
+        				$('#frmUsers').slideUp(800);
         				return true;
         			}
         			catch(err)
