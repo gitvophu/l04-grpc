@@ -16,7 +16,7 @@ Route::get('/add-product-view/{id?}', 'TestController@addProductView')->name('ad
 Route::get('/delete-product/{id}', 'TestController@deleteProduct')->name('deleteProduct');
 
 Route::get('/nguoiDung', 'userController@layDanhSachNguoiDung');
-Route::post('/nguoiDung/layThongTinCapNhat', 'userController@layThongTinCapNhat');
-Route::post('/nguoiDung/them', 'userController@themNguoiDung');
-Route::post('/nguoiDung/xoa', 'userController@xoaNguoiDung');
-Route::post('/nguoiDung/capNhatNguoiDung', 'userController@capNhatNguoiDung');
+Route::post('/nguoiDung/layThongTinCapNhat', 'userController@layThongTinCapNhat')->name('layThongTinCapNhat');
+Route::post('/nguoiDung/them', 'userController@themNguoiDung')->name('them');
+Route::post('/nguoiDung/xoa', 'userController@xoaNguoiDung')->name('xoa');
+Route::post('/nguoiDung/capNhatNguoiDung', 'userController@capNhatNguoiDung')->name('capNhatNguoiDung');
