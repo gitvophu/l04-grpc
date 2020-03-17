@@ -11,31 +11,33 @@ class MiController extends Controller
 {
     protected $view_data = [];
     const API_HOST = '192.168.1.27:50051';
-    function getListUser(){
-        
-        
+    function getListDistributor(){
         $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
         ]);
-        $request = new \Phuvo\CustomGrpc\Helloworld\GetProductListRequest();
-        list($reply,$status) = $client->GetProductList($request)->wait();
+        $request = new \Phuvo\CustomGrpc\Helloworld\GetNppListRequest();
+        list($reply,$status) = $client->GetNppList($request)->wait();
         
         $message = $reply->getMessage();
-        $list_products = json_decode($message,true);
-        return view('products.product_list',compact('list_products'));
+        $list_distributors = json_decode($message,true);
+        return view('distributors.index',compact('list_distributors'));
     }
 
 
-    function addProduct(Request $req, $id=null){
+    function addDistributorStore(Request $req, $id=null){
+        
         $validator = Validator::make($req->all(),[
             'txtName'=>'required|max:255',
-            'txtPrice'=>'required|numeric|min:0'
+            'txtAge'=>'required|numeric|min:1',
+            'txtEmail'=>'required|email'
         ],[
-            'txtName.required'=>'Không được bỏ trống tên sản phẩm',
-            'txtName.max'=>'Tên sản phẩm tối đa 255 ký tự',
-            'txtPrice.required'=>'Giá sản phẩm không được bỏ trống',
-            'txtPrice.numeric'=>'Giá sản phẩm phải là số',
-            'txtPrice.min'=>'Giá sản phẩm phải lớn hơn hoặc bằng 0',
+            'txtName.required'=>'Không được bỏ trống tên npp',
+            'txtName.max'=>'Tên npp tối đa 255 ký tự',
+            'txtAge.required'=>'Tuổi npp không được bỏ trống',
+            'txtAge.numeric'=>'Tuổi npp phải là số',
+            'txtAge.min'=>'Tuổi npp phải lớn hơn hoặc bằng 1',
+            'txtEmail.required'=>'Không được bỏ trống email',
+            'txtEmail.email'=>'Email Không đúng định dạng',
         ]);
         $data = $req->all();
         if($validator->fails()){
@@ -47,46 +49,48 @@ class MiController extends Controller
         ]);
         $response = [];
         if(empty($id)){
-            $request = new \Phuvo\CustomGrpc\Helloworld\AddProductRequest();
+            $request = new \Phuvo\CustomGrpc\Helloworld\AddNppRequest();
             $request->setName($data['txtName']);
-            $request->setPrice($data['txtPrice']);
-            list($reply,$status) = $client->AddProduct($request)->wait();
+            $request->setAge($data['txtAge']);
+            $request->setEmail($data['txtEmail']);
+            list($reply,$status) = $client->AddNpp($request)->wait();
             $response['message'] = $reply->getMessage();
             $response['code'] = $reply->getCode();
             $response['id'] = $reply->getId();
-        }else{
-            // kiem tra id co ton tai hay khong
-            $request = new \Phuvo\CustomGrpc\Helloworld\ShowProductRequest();
-            $request->setId($id);
-            list($reply,$status) =  $client->ShowProduct($request)->wait();
-            $response = [];
-            $response['code'] = $reply->getCode();
-            // $response['message'] = $reply->getMessage();
-            // $response['id'] = $reply->getCode();
-            // $response['name'] = $reply->getName();
-            // $response['price'] = $reply->getPrice();
-            if ($response['code'] != 1000) {
-                return back()->withErrors('code_err','Xảy ra lỗi, sản phẩm này không tồnn tại');
-            }
-            $updateRequest = new \Phuvo\CustomGrpc\Helloworld\AddProductRequest();
-            $updateRequest->setId($id);
-            $updateRequest->setName($data['txtName']);
-            $updateRequest->setPrice($data['txtPrice']);
-            list($reply,$status) = $client->AddProduct($updateRequest)->wait();
-            
-            $response['code'] = $reply->getCode();
-            $response['message'] = $reply->getMessage();
-            $response['id'] = $reply->getId();
-            
         }
+        // else{
+        //     // kiem tra id co ton tai hay khong
+        //     $request = new \Phuvo\CustomGrpc\Helloworld\ShowProductRequest();
+        //     $request->setId($id);
+        //     list($reply,$status) =  $client->ShowProduct($request)->wait();
+        //     $response = [];
+        //     $response['code'] = $reply->getCode();
+        //     // $response['message'] = $reply->getMessage();
+        //     // $response['id'] = $reply->getCode();
+        //     // $response['name'] = $reply->getName();
+        //     // $response['price'] = $reply->getPrice();
+        //     if ($response['code'] != 1000) {
+        //         return back()->withErrors('code_err','Xảy ra lỗi, sản phẩm này không tồnn tại');
+        //     }
+        //     $updateRequest = new \Phuvo\CustomGrpc\Helloworld\AddProductRequest();
+        //     $updateRequest->setId($id);
+        //     $updateRequest->setName($data['txtName']);
+        //     $updateRequest->setPrice($data['txtPrice']);
+        //     list($reply,$status) = $client->AddProduct($updateRequest)->wait();
+            
+        //     $response['code'] = $reply->getCode();
+        //     $response['message'] = $reply->getMessage();
+        //     $response['id'] = $reply->getId();
+            
+        // }
         if($response['code'] != 1000){
-            $validator->errors()->add('code_err','Xảy ra lỗi, Server không thể thêm/cập nhật sản phẩm');
+            $validator->errors()->add('code_err','Xảy ra lỗi, Server không thể thêm npp');
             return back()->withErrors($validator)->withInput();
         }
-        return back()->with('success','Thêm/cập nhật sản phẩm thành công');
+        return back()->with('success','Thêm/cập nhật npp thành công');
     }
 
-    function addProductView($id = null){
+    function addDistributor($id = null){
         $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
         ]);
@@ -111,9 +115,9 @@ class MiController extends Controller
             ];
             return view('products.product_add',$this->view_data);
         }
-        return view('products.product_add');
+        return view('distributors.add');
     }
-    function deleteProduct(Request $request,$id){
+    function deleteDistributor(Request $request,$id){
         
         $validator = Validator::make([],[],[]);
         if(empty($id)){
@@ -123,18 +127,18 @@ class MiController extends Controller
             $validator->errors()->add('id.min','id phải lớn hơn 0');
         }
         if($validator->fails()){
-            return redirect()->route('listProduct')->withErrors($validator)->withInput();
+            return redirect()->route('listDistributor')->withErrors($validator)->withInput();
         }
         $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
             'credentials' => \Grpc\ChannelCredentials::createInsecure(),
         ]);
-        $deleteRequest = new \Phuvo\CustomGrpc\Helloworld\DeleteProductRequest();
+        $deleteRequest = new \Phuvo\CustomGrpc\Helloworld\DeleteNppRequest();
         $deleteRequest->setId($id);
-        list($reply,$status) = $client->DeleteProduct($deleteRequest)->wait();
+        list($reply,$status) = $client->DeleteNpp($deleteRequest)->wait();
         if ($reply->getCode() != 1000) {
             $validator->errors()->add('code_err',$reply->getMessage());
-            return redirect()->route('listProduct')->withErrors($validator)->withInput();
+            return redirect()->route('listDistributor')->withErrors($validator)->withInput();
         }
-        return redirect()->route('listProduct')->with('success','Đã xóa sản phẩm thành công');
+        return redirect()->route('listDistributor')->with('success','Đã xóa sản phẩm thành công');
     }
 }

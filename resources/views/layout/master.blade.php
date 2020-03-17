@@ -17,6 +17,10 @@
             <li class="{{url()->current() == route('listProduct')?'active':''}}"><a href="{{route('listProduct')}}">Danh sách sản phẩm</a></li>
             <li class ="{{url()->current() == route('addProductView')?'active':''}}"><a href="{{route('addProductView')}}">Thêm sản phẩm</a></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="{{url()->current() == route('listDistributor')?'active':''}}"><a href="{{route('listDistributor')}}">Danh sách NPP</a></li>
+            <li class ="{{url()->current() == route('addDistributor')?'active':''}}"><a href="{{route('addDistributor')}}">Thêm NPP</a></li>
+          </ul>
         </div>
       </nav>
     @yield('content')
