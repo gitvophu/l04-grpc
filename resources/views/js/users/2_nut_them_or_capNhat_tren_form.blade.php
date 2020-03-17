@@ -12,6 +12,7 @@
         				var formData = null;
         				var $this = $(this);
         				var cmd = $this.attr('data-button-command');
+        				var _url = '{{route("them")}}';
 
         				tenNguoiDung = $('#txtTenNguoiDung').val();
         				tuoi = $('#numTuoi').val();
@@ -29,11 +30,14 @@
     					formData.append('tuoi', tuoi);
     					formData.append('email', email);
         				if(cmd === 'capnhat')
+        				{
         					formData.append('id', $this.attr('data-button-userId'));
+        					_url = '{{route("capNhatNguoiDung")}}';
+        				}
         				$.ajax({
         					type: 'POST',
         					dataType: 'JSON',
-	                        url: '/l04-grpc/public/nguoiDung/them',
+	                        url: url,
 	                        xhr: function(){return $.ajaxSettings.xhr();},
 	                        cache: false,
 	                        contentType: false,

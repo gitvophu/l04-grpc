@@ -13,7 +13,7 @@
 	                    $.ajax({
 	                        type: 'POST',
 	                        dataType : 'JSON',
-	                        url: '/l04-grpc/public/nguoiDung/layThongTinCapNhat',
+	                        url: '{{route("layThongTinCapNhat"}}',
 	                        xhr: function(){return $.ajaxSettings.xhr();},
 	                        cache: false,
 	                        contentType: false,

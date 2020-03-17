@@ -19,7 +19,7 @@
 	                        $.ajax({
 	                            type: 'POST',
 	                            dataType : 'JSON',
-	                            url: '/l04-grpc/public/nguoiDung/xoa',
+	                            url: '{{route("xoa"}}',
 	                            xhr: function(){return $.ajaxSettings.xhr();},
 	                            cache: false,
 	                            contentType: false,
