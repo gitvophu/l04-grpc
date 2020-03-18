@@ -31,6 +31,10 @@ class AddNppRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string email = 4;</code>
      */
     protected $email = '';
+    /**
+     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 5;</code>
+     */
+    protected $image = null;
 
     /**
      * Constructor.
@@ -42,6 +46,7 @@ class AddNppRequest extends \Google\Protobuf\Internal\Message
      *     @type string $name
      *     @type string $age
      *     @type string $email
+     *     @type \Phuvo\CustomGrpc\Helloworld\FileUpload $image
      * }
      */
     public function __construct($data = NULL) {
@@ -133,6 +138,28 @@ class AddNppRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->email = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 5;</code>
+     * @return \Phuvo\CustomGrpc\Helloworld\FileUpload
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 5;</code>
+     * @param \Phuvo\CustomGrpc\Helloworld\FileUpload $var
+     * @return $this
+     */
+    public function setImage($var)
+    {
+        GPBUtil::checkMessage($var, \Phuvo\CustomGrpc\Helloworld\FileUpload::class);
+        $this->image = $var;
 
         return $this;
     }

@@ -23,6 +23,7 @@
                     <th>ID</th>
                     <th>Tên sản phẩm</th>
                     <th>Giá tiền</th>
+                    <th>Hình ảnh</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -33,10 +34,14 @@
                     <td>SP{{ sprintf('%07d',$product['id']) }}</td>
                     <td>{{$product['name']}}</td>
                     <td>${{$product['price']}}</td>
+                    <td width=20%>
+                        <img src="{{$HOST_RESOURCE."/".$product['image']}}" alt="" style="max-width: 100%">
+                    </td>
                     <td>
                         <div class="btn-group">
-                            <button data-button-id="btnXoa" class="btn btn-danger" data-button-idProduct="{{$product['id']}}">Xoá</button>
-                            <button data-button-id="btnSua" class="btn btn-info" data-button-idProduct="{{$product['id']}}">Sửa</button>
+                            <a href="<?=route('deleteProduct',['id'=>$product['id']])?>"><button class="btn btn-danger" >Xoá</button></a>
+                            <a href="<?=route('addProductView',['id'=>$product['id']])?>"><button class="btn btn-info" >Sửa</button></a>
+                            
                         </div>
                     </td>
                 </tr>
@@ -112,7 +117,7 @@
                         $.ajax({
                             type: 'POST',
                             dataType : 'JSON',
-                            url: '/l04-grpc/public//delete-product',
+                            url: '<?= route('themNguoiDung') ?>',
                             xhr: function(){return $.ajaxSettings.xhr();},
                             cache: false,
                             contentType: false,

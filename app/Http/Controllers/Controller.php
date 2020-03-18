@@ -10,4 +10,5 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    const HOST_RESOURCE = 'http://192.168.1.27:9001';
 }

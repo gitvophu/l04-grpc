@@ -63,12 +63,27 @@ message GetProductListRequest{
 }
 message GetProductListResponse{
   string message = 1;
+  repeated Product products = 2;
 }
-
+message Product {
+  string id = 1;
+  string name = 2;
+  string price = 3;
+  string image = 4;
+}
+message FileUpload{
+  string name = 1;
+  string extension = 2;
+  bytes base64 = 3;
+}
 message AddProductRequest{
   string id = 1;
   string name = 2;
   string price = 3;
+  FileUpload image = 4;
+
+  
+  
 }
 message AddProductResponse{
   string id = 1;
@@ -103,6 +118,7 @@ message AddUserRequest{
   string name = 2;
   string age = 3;
   string email = 4;
+  FileUpload image = 5;
 }
 message AddUserResponse{
   string code = 1;
@@ -141,6 +157,7 @@ message AddNppRequest{
   string name = 2;
   string age = 3;
   string email = 4;
+  FileUpload image = 5;
 }
 message AddNppResponse{
   string code = 1;
@@ -174,14 +191,10 @@ message ShowNppResponse{
   string age = 5;
   string email = 6;
 }
-//update
-// message UpdateProductRequest{
-//   string id = 1;
-//   string name = 2;
-//   string price = 3;
-// }
-// message UpdateProductResponse{
-//   string id = 1;
-//   string code = 2;
-//   string message = 3;
-// }
+
+//Product category
+message ProductCategory{
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}

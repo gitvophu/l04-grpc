@@ -9,9 +9,9 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>phuvo.customGrpc.helloworld.AddProductRequest</code>
+ * Generated from protobuf message <code>phuvo.customGrpc.helloworld.Product</code>
  */
-class AddProductRequest extends \Google\Protobuf\Internal\Message
+class Product extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>string id = 1;</code>
@@ -26,9 +26,9 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
      */
     protected $price = '';
     /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
+     * Generated from protobuf field <code>string image = 4;</code>
      */
-    protected $image = null;
+    protected $image = '';
 
     /**
      * Constructor.
@@ -39,7 +39,7 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
      *     @type string $id
      *     @type string $name
      *     @type string $price
-     *     @type \Phuvo\CustomGrpc\Helloworld\FileUpload $image
+     *     @type string $image
      * }
      */
     public function __construct($data = NULL) {
@@ -114,8 +114,8 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
-     * @return \Phuvo\CustomGrpc\Helloworld\FileUpload
+     * Generated from protobuf field <code>string image = 4;</code>
+     * @return string
      */
     public function getImage()
     {
@@ -123,13 +123,13 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
-     * @param \Phuvo\CustomGrpc\Helloworld\FileUpload $var
+     * Generated from protobuf field <code>string image = 4;</code>
+     * @param string $var
      * @return $this
      */
     public function setImage($var)
     {
-        GPBUtil::checkMessage($var, \Phuvo\CustomGrpc\Helloworld\FileUpload::class);
+        GPBUtil::checkString($var, True);
         $this->image = $var;
 
         return $this;

@@ -9,9 +9,11 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>phuvo.customGrpc.helloworld.AddProductRequest</code>
+ *Product category
+ *
+ * Generated from protobuf message <code>phuvo.customGrpc.helloworld.ProductCategory</code>
  */
-class AddProductRequest extends \Google\Protobuf\Internal\Message
+class ProductCategory extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>string id = 1;</code>
@@ -22,13 +24,9 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
      */
     protected $name = '';
     /**
-     * Generated from protobuf field <code>string price = 3;</code>
+     * Generated from protobuf field <code>string description = 3;</code>
      */
-    protected $price = '';
-    /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
-     */
-    protected $image = null;
+    protected $description = '';
 
     /**
      * Constructor.
@@ -38,8 +36,7 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
      *
      *     @type string $id
      *     @type string $name
-     *     @type string $price
-     *     @type \Phuvo\CustomGrpc\Helloworld\FileUpload $image
+     *     @type string $description
      * }
      */
     public function __construct($data = NULL) {
@@ -92,45 +89,23 @@ class AddProductRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string price = 3;</code>
+     * Generated from protobuf field <code>string description = 3;</code>
      * @return string
      */
-    public function getPrice()
+    public function getDescription()
     {
-        return $this->price;
+        return $this->description;
     }
 
     /**
-     * Generated from protobuf field <code>string price = 3;</code>
+     * Generated from protobuf field <code>string description = 3;</code>
      * @param string $var
      * @return $this
      */
-    public function setPrice($var)
+    public function setDescription($var)
     {
         GPBUtil::checkString($var, True);
-        $this->price = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
-     * @return \Phuvo\CustomGrpc\Helloworld\FileUpload
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Generated from protobuf field <code>.phuvo.customGrpc.helloworld.FileUpload image = 4;</code>
-     * @param \Phuvo\CustomGrpc\Helloworld\FileUpload $var
-     * @return $this
-     */
-    public function setImage($var)
-    {
-        GPBUtil::checkMessage($var, \Phuvo\CustomGrpc\Helloworld\FileUpload::class);
-        $this->image = $var;
+        $this->description = $var;
 
         return $this;
     }

@@ -17,6 +17,10 @@ class GetProductListResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string message = 1;</code>
      */
     protected $message = '';
+    /**
+     * Generated from protobuf field <code>repeated .phuvo.customGrpc.helloworld.Product products = 2;</code>
+     */
+    private $products;
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ class GetProductListResponse extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $message
+     *     @type \Phuvo\CustomGrpc\Helloworld\Product[]|\Google\Protobuf\Internal\RepeatedField $products
      * }
      */
     public function __construct($data = NULL) {
@@ -50,6 +55,28 @@ class GetProductListResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->message = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .phuvo.customGrpc.helloworld.Product products = 2;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .phuvo.customGrpc.helloworld.Product products = 2;</code>
+     * @param \Phuvo\CustomGrpc\Helloworld\Product[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setProducts($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Phuvo\CustomGrpc\Helloworld\Product::class);
+        $this->products = $arr;
 
         return $this;
     }

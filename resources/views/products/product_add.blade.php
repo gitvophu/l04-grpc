@@ -14,7 +14,7 @@
             $route_data['id']=$product['id'];
         }
         @endphp 
-        <form action="{{route('addProduct',$route_data)}}" method="post" >
+        <form action="{{route('addProduct',$route_data)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="col-md-6">
                 <div class="form-group">
@@ -24,6 +24,10 @@
                 <div class="form-group">
                     <label for="">Giá tiền</label>
                     <input name="txtPrice" type="text" class="form-control" value="{{isset($product)?$product['price']:old('txtPrice')}}">
+                </div>
+                <div class="form-group">
+                    <label for="">Giá tiền</label>
+                    <input type="file" name="hinhanh">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" 

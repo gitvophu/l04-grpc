@@ -20,13 +20,40 @@ class TestController extends Controller
         list($reply,$status) = $client->GetProductList($request)->wait();
         
         $message = $reply->getMessage();
-        $list_products = json_decode($message,true);
-        return view('products.product_list',compact('list_products'));
+        $products = $reply->getProducts();
+        
+        $list_products = [];
+        // $list_products2 = $reply->getProducts();
+        foreach($products as $product){
+            $tmp_product = [];    
+            $tmp_product['id'] = $product->getId();
+            $tmp_product['name'] = $product->getName();
+            $tmp_product['price'] = $product->getPrice();
+            $tmp_product['image'] = $product->getImage();
+            $list_products[] = $tmp_product;
+        }
+        
+        // dd($list_products);
+        // $list_products = json_decode($message,true);
+        $this->view_data = [
+            'list_products'=>$list_products,
+            // 'list_products2'=>$list_products2,
+            'HOST_RESOURCE'=>self::HOST_RESOURCE,
+        ];
+        return view('products.product_list', $this->view_data);
     }
 
-
+    function base64_to_jpeg($base64_string,$output_file){
+        $tmp = explode(',',$base64_string);
+        $fh = fopen($output_file,'wb');
+        fwrite($fh,base64_decode($tmp[1]));
+        fclose($fh);
+        return $output_file;
+    }
     function addProduct(Request $req, $id=null){
-        
+        if($req->hasFile('hinhanh')){
+            $file = $req->hinhanh;
+        }
         $validator = Validator::make($req->all(),[
             'txtName'=>'required|max:255',
             'txtPrice'=>'required|numeric|min:0'
@@ -50,10 +77,39 @@ class TestController extends Controller
             $request = new \Phuvo\CustomGrpc\Helloworld\AddProductRequest();
             $request->setName($data['txtName']);
             $request->setPrice($data['txtPrice']);
+            if($file){
+                $type = $file->getMimeType();
+                $ext = $file->getClientOriginalExtension();
+                $name = rand(1,10000).'_'.$file->getClientOriginalName();
+
+                $path = $file->getRealPath();
+                $content = file_get_contents($path);
+                $base64_string = "data:{$type};base64,".base64_encode($content);
+                $fileUpload = new \Phuvo\CustomGrpc\Helloworld\FileUpload();
+                $fileUpload->setName($name);
+                $fileUpload->setExtension($ext);
+                $fileUpload->setBase64($base64_string);
+                $request->setImage($fileUpload);
+
+                $requestTest = new \Phuvo\CustomGrpc\Helloworld\AddUserRequest();
+                $requestTest->setId(29);
+                $requestTest->setName("Name test");
+                $requestTest->setAge(19);
+                $requestTest->setEmail("nguyenA@email.com");
+                $requestTest->setImage($fileUpload);
+                list($reply,$status) = $client->AddUser($requestTest)->wait();
+                dd($reply,$status);
+            }
+           
+            exit;
             list($reply,$status) = $client->AddProduct($request)->wait();
+            
             $response['message'] = $reply->getMessage();
             $response['code'] = $reply->getCode();
             $response['id'] = $reply->getId();
+            // $response['category'] = $reply->getCategory();
+            
+            
         }else{
             // kiem tra id co ton tai hay khong
             $request = new \Phuvo\CustomGrpc\Helloworld\ShowProductRequest();
@@ -68,10 +124,28 @@ class TestController extends Controller
             if ($response['code'] != 1000) {
                 return back()->withErrors('code_err','Xảy ra lỗi, sản phẩm này không tồnn tại');
             }
+            
             $updateRequest = new \Phuvo\CustomGrpc\Helloworld\AddProductRequest();
             $updateRequest->setId($id);
             $updateRequest->setName($data['txtName']);
             $updateRequest->setPrice($data['txtPrice']);
+
+            
+
+            if(!empty($file)){
+                $type = $file->getMimeType();
+                $ext = $file->getClientOriginalExtension();
+                $name = rand(1,10000).'_'.$file->getClientOriginalName();
+
+                $path = $file->getRealPath();
+                $content = file_get_contents($path);
+                $base64_string = "data:{$type};base64,".base64_encode($content);
+                $fileUpload = new \Phuvo\CustomGrpc\Helloworld\FileUpload();
+                $fileUpload->setName($name);
+                $fileUpload->setExtension($ext);
+                $fileUpload->setBase64($base64_string);
+                $updateRequest->setImage($fileUpload);
+            }
             list($reply,$status) = $client->AddProduct($updateRequest)->wait();
             
             $response['code'] = $reply->getCode();
@@ -80,7 +154,7 @@ class TestController extends Controller
             
         }
         if($response['code'] != 1000){
-            $validator->errors()->add('code_err','Xảy ra lỗi, Server không thể thêm/cập nhật sản phẩm');
+            $validator->errors()->add('code_err',$response['message']);
             return back()->withErrors($validator)->withInput();
         }
         return back()->with('success','Thêm/cập nhật sản phẩm thành công');
