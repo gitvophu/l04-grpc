@@ -44,6 +44,7 @@ class userController extends Controller
     		$request = NULL;
     		$reply = NULL;
     		$status = NULL;
+    		$upImage = NULL;
 
 	    	$client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
 	            'credentials' => \Grpc\ChannelCredentials::createInsecure(),
@@ -52,6 +53,14 @@ class userController extends Controller
             $request->setName($req->tenNguoiDung);
             $request->setAge($req->tuoi);
             $request->setEmail($req->email);
+            if($req->anhDaiDien)
+            {
+            	$upImage = new \Phuvo\CustomGrpc\Helloworld\FileUpload();
+            	$upImage->setName($req->tenFile);
+            	$upImage->setExtension($req->duoiFile);
+            	$upImage->setBase64($req->anhDaiDien);
+	            $request->setImage($upImage);
+            }
             list($reply,$status) = $client->AddUser($request)->wait();
             if($reply->getCode() != 1000)
             	throw new \Exception('Thêm người dùng thất bại');
@@ -103,6 +112,7 @@ class userController extends Controller
 			$status = NULL;
 			$updateRequest = NULL;
 			$response = [];
+    		$upImage = NULL;
 
 	        $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
 	            'credentials' => \Grpc\ChannelCredentials::createInsecure(),
@@ -112,12 +122,19 @@ class userController extends Controller
 	        list($reply,$status) =  $client->ShowUser($request)->wait();
 	        if($reply->getCode() != 1000)
 	            throw new \Exception('Người dùng không tồn tại');
-	        
 	        $updateRequest = new \Phuvo\CustomGrpc\Helloworld\AddUserRequest();
 	        $updateRequest->setId($req->id);
 	        $updateRequest->setName($req->tenNguoiDung);
 	        $updateRequest->setAge($req->tuoi);
 	        $updateRequest->setEmail($req->email);
+	        if($req->anhDaiDien)
+            {
+            	$upImage = new \Phuvo\CustomGrpc\Helloworld\FileUpload();
+            	$upImage->setName($req->tenFile);
+            	$upImage->setExtension($req->duoiFile);
+            	$upImage->setBase64($req->anhDaiDien);
+	            $request->setImage($upImage);
+            }
 	        list($reply,$status) = $client->AddUser($updateRequest)->wait();
 	        if($reply->getCode() != 1000)
 	            throw new \Exception('Cập nhật người dùng thất bại');

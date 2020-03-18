@@ -15,8 +15,32 @@
 		                    <input type="number" min="18" max="70" class="form-control" id="numTuoi">
 		                </div>
 		                <div class="form-group">
-		                    <label for="">email</label>
+		                    <label for="">Email</label>
 		                    <input type="email" class="form-control" id="txtEmail">
+		                </div>
+		                <div class="form-group">
+		                	<div class="row">
+		                		<div class="col-md-12">
+			                    	<label for="">Chọn ảnh đại diện</label>
+			                    </div>
+		                	</div>
+		                	<div class="row">
+		                		<div class="col-md-12">
+					                <input type="file" class="form-control" id="fileAnh">
+			                    </div>
+		                	</div>
+		                </div>
+		                <div class="form-group">
+		                	<div class="row">
+		                		<div class="col-md-12">
+			                    	<label for="">Ảnh đại diện</label>
+			                    </div>
+		                	</div>
+		                	<div class="row">
+		                		<div class="col-md-12">
+					                <img src="" id="imgFileAnh" crossorigin="anonymous">
+			                    </div>
+		                	</div>
 		                </div>
 		                <div class="form-group">
 		                	<div class="btn-group">
@@ -38,9 +62,10 @@
                 <tr>
                     <th>STT</th>
                     <th>ID</th>
-                    <th>Tên ngươi dùng</th>
+                    <th>Tên người dùng</th>
                     <th>Tuổi</th>
                     <th>Email</th>
+                    <th>Ảnh đại diện</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -52,6 +77,7 @@
                     <td>{{$nguoiDung['name']}}</td>
                     <td>{{$nguoiDung['age']}}</td>
                     <td>${{$nguoiDung['email']}}</td>
+                    <td>@if($nguoiDung['image'])<img src="{{$nguoiDung['image']}}" alt="Ảnh đại diện">@else Chưa cập nhật @endif</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" data-button-id="btnXoa" class="btn btn-danger" data-button-userId="{{$nguoiDung['id']}}" data-button-userName="{{$nguoiDung['name']}}">Xoá</button>
@@ -78,4 +104,6 @@
 	@include('js.users.3_nut_cap_nhat_tren_table')
 	<!-- Xử lý cho nút xoá trên table -->
 	@include('js.users.4_nut_xoa_tren_table')
+	<!-- Xử lý hiển thị ảnh sau khi chọn -->
+	@include('js.users.5_xu_ly_hien_thi_anh_sau_khi_chon')
 @endsection

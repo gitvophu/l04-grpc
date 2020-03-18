@@ -1,4 +1,5 @@
 <script>
+	//check email in form
 	function checkEmail(email)
 	{
 	    try

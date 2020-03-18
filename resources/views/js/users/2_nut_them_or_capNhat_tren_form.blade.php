@@ -13,11 +13,12 @@
         				var $this = $(this);
         				var cmd = $this.attr('data-button-command');
         				var _url = '{{route("them")}}';
+        				var anhDaiDien = $('#imgFileAnh').attr('src');
+        				var file = null;
 
         				tenNguoiDung = $('#txtTenNguoiDung').val();
         				tuoi = $('#numTuoi').val();
         				email = $('#txtEmail').val();
-
         				if(tenNguoiDung.length > 64 || !tenNguoiDung)
         					throw new TypeError('Tên người dùng không được rỗng và phải có độ dài nhỏ hơn 64 ký tự!');
         				if(!tuoi || isNaN(tuoi) || (!isNaN(tuoi) && (tuoi < 18 || tuoi > 70)))
@@ -29,6 +30,13 @@
     					formData.append('tenNguoiDung', tenNguoiDung);
     					formData.append('tuoi', tuoi);
     					formData.append('email', email);
+    					if(anhDaiDien)
+    					{
+    						file = $('#fileAnh').prop('files')[0];
+	    					formData.append('', anhDaiDien);
+	    					formData.append('tenFile', file.name.split('.')[0]);
+	    					formData.append('duoiFile', file.name.split('.')[1]);
+    					}
         				if(cmd === 'capnhat')
         				{
         					formData.append('id', $this.attr('data-button-userId'));
@@ -69,6 +77,7 @@
 							                    <td>' + tenNguoiDung + '</td>\
 							                    <td>' + tuoi + '</td>\
 							                    <td>' + email + '</td>\
+							                    <td>' + (anhDaiDien ? '<img src="' + anhDaiDien + '" alt="Ảnh đại diện">' : 'Chưa cập nhật') + '</td>\
 							                    <td>\
 							                        <div class="btn-group">\
 							                            <button data-button-id="btnXoa" class="btn btn-danger" data-button-userId="' + data.id + '" data-button-userName="' + tenNguoiDung + '">Xoá</button>\

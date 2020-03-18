@@ -23,6 +23,9 @@
             <li class="{{url()->current() == route('listDistributor')?'active':''}}"><a href="{{route('listDistributor')}}">Danh sách NPP</a></li>
             <li class ="{{url()->current() == route('addDistributor')?'active':''}}"><a href="{{route('addDistributor')}}">Thêm NPP</a></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="{{url()->current() == url('nguoiDung')?'active':''}}"><a href="{{url('nguoiDung')}}">Quản lý người dùng</a></li>
+          </ul>
         </div>
       </nav>
     @yield('content')
