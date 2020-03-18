@@ -1,0 +1,73 @@
+#QUẢN LÝ SẢN PHẨM
+*** products
+- id
+- name
+- price
+- image
+***npp
+- id
+- name
+- age
+- email
+***users
+- id
+- name
+- age
+- email
+*** order_detail
+- id
+- product_id
+- quantity
+- total_price
+- order_id
+*** order
+- id 
+- note
+- status
+- address
+- phone
+- user_id
+- total_price
+################## API DOCUMENT ##################
+#Lấy DS đơn hàng
+**Request
+- Ko cần truyền gì cả
+**Response
+- orders: array có kiểu là Order | dùng foreach để duyệt
+------------------------------------------------------
+#Tạo đơn hàng
+**Request
+- note: string (ghi chú)
+- address: string (địa chỉ)
+- phone: (sđt)
+- user_id: int | (id user mua hàng)
+- order_detail: array | (danh sách sản phẩm)
+    - product_id: int (id sản phẩm)
+    - quantity ( số` lượng)
+**Response
+- id:int | (id được tạo)
+- code:int | (mã code trả về)
+- message: string (thông báo)
+------------------------------------------------------
+#Cập nhât đơn hàng
+**Request
+- id: int (id đơn hàng)
+- note: string (ghi chú)
+- address: string (địa chỉ)
+- phone: (sđt)
+- user_id: int | (id user mua hàng)
+- order_detail: array | (danh sách sản phẩm)
+    - product_id: int (id sản phẩm)
+    - quantity ( số` lượng)
+**Response
+- id:int | (id được cập nhật)
+- code:int | (mã code trả về)
+- message: string (thông báo)
+--------------------------------------------------
+# Hủy đơn hàng
+**Request
+- id: int | id đơn hàng
+**Response
+- id:int | (id được hủy)
+- code:int | (mã code trả về)
+- message: string (thông báo)

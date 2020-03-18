@@ -228,4 +228,17 @@ class GreeterClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\GetOrderListRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetOrderList(\Phuvo\CustomGrpc\Helloworld\GetOrderListRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/GetOrderList',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\GetOrderListResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }
