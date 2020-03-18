@@ -91,17 +91,8 @@ class TestController extends Controller
                 $fileUpload->setBase64($base64_string);
                 $request->setImage($fileUpload);
 
-                $requestTest = new \Phuvo\CustomGrpc\Helloworld\AddUserRequest();
-                $requestTest->setId(29);
-                $requestTest->setName("Name test");
-                $requestTest->setAge(19);
-                $requestTest->setEmail("nguyenA@email.com");
-                $requestTest->setImage($fileUpload);
-                list($reply,$status) = $client->AddUser($requestTest)->wait();
-                dd($reply,$status);
             }
            
-            exit;
             list($reply,$status) = $client->AddProduct($request)->wait();
             
             $response['message'] = $reply->getMessage();
