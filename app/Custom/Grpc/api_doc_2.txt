@@ -49,22 +49,8 @@
 - id:int | (id được tạo)
 - code:int | (mã code trả về)
 - message: string (thông báo)
+
 ------------------------------------------------------
-#Cập nhât đơn hàng
-**Request
-- id: int (id đơn hàng)
-- note: string (ghi chú)
-- address: string (địa chỉ)
-- phone: (sđt)
-- user_id: int | (id user mua hàng)
-- order_detail:  array AddOrderDetailInfo | (danh sách sản phẩm)
-    - product_id: int (id sản phẩm)
-    - quantity ( số` lượng)
-**Response
-- id:int | (id được cập nhật)
-- code:int | (mã code trả về)
-- message: string (thông báo)
---------------------------------------------------
 # Hủy đơn hàng
 **Request
 - order_id: int | id đơn hàng
@@ -72,3 +58,11 @@
 - order_id:int | (id được hủy)
 - code:int | (mã code trả về)
 - message: string (thông báo)
+------------------------------------------------------
+# Cập nhật chi tiết đơn hàng
+**Request
+- id: int (id đơn hàng)
+- product_id: int 
+- quantity: int
+# Hủy chi tiết đơn hàng
+- id: int (id chi tiết đơn hàng)
