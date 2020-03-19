@@ -241,4 +241,30 @@ class GreeterClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\AddOrderRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function AddOrder(\Phuvo\CustomGrpc\Helloworld\AddOrderRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/AddOrder',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\AddOrderResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Phuvo\CustomGrpc\Helloworld\DeleteOrderRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteOrder(\Phuvo\CustomGrpc\Helloworld\DeleteOrderRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/phuvo.customGrpc.helloworld.Greeter/DeleteOrder',
+        $argument,
+        ['\Phuvo\CustomGrpc\Helloworld\DeleteOrderResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

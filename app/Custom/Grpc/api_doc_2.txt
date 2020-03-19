@@ -37,13 +37,14 @@
 ------------------------------------------------------
 #Tạo đơn hàng
 **Request
-- note: string (ghi chú)
-- address: string (địa chỉ)
-- phone: (sđt)
-- user_id: int | (id user mua hàng)
-- order_detail: array | (danh sách sản phẩm)
-    - product_id: int (id sản phẩm)
-    - quantity ( số` lượng)
+    - order: kiểu AddOrderInfo | 
+        - note: string (ghi chú)
+        - address: string (địa chỉ)
+        - phone: (sđt)
+        - user_id: int | (id user mua hàng)
+        - addOrderDetailInfo: array | AddOrderDetailInfo (danh sách sản phẩm)
+            - product_id: int (id sản phẩm)
+            - quantity : int( số` lượng)
 **Response
 - id:int | (id được tạo)
 - code:int | (mã code trả về)
@@ -56,7 +57,7 @@
 - address: string (địa chỉ)
 - phone: (sđt)
 - user_id: int | (id user mua hàng)
-- order_detail: array | (danh sách sản phẩm)
+- order_detail:  array AddOrderDetailInfo | (danh sách sản phẩm)
     - product_id: int (id sản phẩm)
     - quantity ( số` lượng)
 **Response
@@ -66,8 +67,8 @@
 --------------------------------------------------
 # Hủy đơn hàng
 **Request
-- id: int | id đơn hàng
+- order_id: int | id đơn hàng
 **Response
-- id:int | (id được hủy)
+- order_id:int | (id được hủy)
 - code:int | (mã code trả về)
 - message: string (thông báo)

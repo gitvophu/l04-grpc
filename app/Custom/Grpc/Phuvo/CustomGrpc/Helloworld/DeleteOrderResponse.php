@@ -9,18 +9,18 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>phuvo.customGrpc.helloworld.DeleteProductResponse</code>
+ * Generated from protobuf message <code>phuvo.customGrpc.helloworld.DeleteOrderResponse</code>
  */
-class DeleteProductResponse extends \Google\Protobuf\Internal\Message
+class DeleteOrderResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>string id = 1;</code>
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
      */
-    protected $id = '';
+    protected $order_id = 0;
     /**
-     * Generated from protobuf field <code>string code = 2;</code>
+     * Generated from protobuf field <code>int32 code = 2;</code>
      */
-    protected $code = '';
+    protected $code = 0;
     /**
      * Generated from protobuf field <code>string message = 3;</code>
      */
@@ -32,8 +32,8 @@ class DeleteProductResponse extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $id
-     *     @type string $code
+     *     @type int $order_id
+     *     @type int $code
      *     @type string $message
      * }
      */
@@ -43,30 +43,30 @@ class DeleteProductResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string id = 1;</code>
-     * @return string
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
+     * @return int
      */
-    public function getId()
+    public function getOrderId()
     {
-        return $this->id;
+        return $this->order_id;
     }
 
     /**
-     * Generated from protobuf field <code>string id = 1;</code>
-     * @param string $var
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
+     * @param int $var
      * @return $this
      */
-    public function setId($var)
+    public function setOrderId($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->id = $var;
+        GPBUtil::checkInt32($var);
+        $this->order_id = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>string code = 2;</code>
-     * @return string
+     * Generated from protobuf field <code>int32 code = 2;</code>
+     * @return int
      */
     public function getCode()
     {
@@ -74,13 +74,13 @@ class DeleteProductResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string code = 2;</code>
-     * @param string $var
+     * Generated from protobuf field <code>int32 code = 2;</code>
+     * @param int $var
      * @return $this
      */
     public function setCode($var)
     {
-        GPBUtil::checkString($var, True);
+        GPBUtil::checkInt32($var);
         $this->code = $var;
 
         return $this;

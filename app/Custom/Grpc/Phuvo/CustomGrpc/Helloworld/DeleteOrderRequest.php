@@ -9,16 +9,14 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * 
- *
- * Generated from protobuf message <code>phuvo.customGrpc.helloworld.UploadRequest</code>
+ * Generated from protobuf message <code>phuvo.customGrpc.helloworld.DeleteOrderRequest</code>
  */
-class UploadRequest extends \Google\Protobuf\Internal\Message
+class DeleteOrderRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>bytes content = 1;</code>
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
      */
-    protected $content = '';
+    protected $order_id = 0;
 
     /**
      * Constructor.
@@ -26,7 +24,7 @@ class UploadRequest extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $content
+     *     @type int $order_id
      * }
      */
     public function __construct($data = NULL) {
@@ -35,23 +33,23 @@ class UploadRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>bytes content = 1;</code>
-     * @return string
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
+     * @return int
      */
-    public function getContent()
+    public function getOrderId()
     {
-        return $this->content;
+        return $this->order_id;
     }
 
     /**
-     * Generated from protobuf field <code>bytes content = 1;</code>
-     * @param string $var
+     * Generated from protobuf field <code>int32 order_id = 1;</code>
+     * @param int $var
      * @return $this
      */
-    public function setContent($var)
+    public function setOrderId($var)
     {
-        GPBUtil::checkString($var, False);
-        $this->content = $var;
+        GPBUtil::checkInt32($var);
+        $this->order_id = $var;
 
         return $this;
     }
