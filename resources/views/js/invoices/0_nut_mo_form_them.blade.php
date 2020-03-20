@@ -18,6 +18,7 @@
 						$('#btnThemOrCapNhat').attr('data-button-command','them');
 						$('#btnThemOrCapNhat').text('Thêm');
 						$('#formTitle').text('Thêm hoá đơn mới');
+						$('#tbody_id_invoiceDetails').html('');
 						$('#divHoaDon').slideDown(800);
 						return true;
 					}

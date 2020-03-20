@@ -2,17 +2,17 @@
 	$(function(){
 		try
 		{
-			if($('#tbody_id_users').length)
-	            $('#tbody_id_users').on('click', '[data-button-id="btnXoa"]', function(){
+			if($('#tbody_id_invoices').length)
+	            $('#tbody_id_invoices').on('click', '[data-button-id="btnXoa"]', function(){
 	                try
 	                {
 	                    var $this = $(this);
 	                    var id = '';
 	                    var formData = null;
-	                    var cf = confirm('Bạn có thực sự muốn xoá người dùng ' + $this.attr('data-button-userName'));
+	                    var cf = confirm('Bạn có thực sự muốn xoá hoá đơn của khách hàng ' + $this.attr('data-button-khachHang'));
                     	if(cf)
                     	{
-	                        id = $this.attr('data-button-userId');
+	                        id = $this.attr('data-button-hoaDonId');
 	                        formData = new FormData();
 	                        formData.append('_token', $('#_token').attr('content'));
 	                        formData.append('id', id);
@@ -29,17 +29,17 @@
 	                            {
 	                                try
 	                                {
-	                                    var frmUsers = $('#frmUsers');
+	                                    var divHoaDon = $('#divHoaDon');
 	                                    if(data.flag)
 	                                    {
-	                                        if((!frmUsers.is(':hidden') || !frmUsers[0].hasAttribute('hidden')) && $('#btnThemOrCapNhat').attr('data-button-userId') === id)
-	                                            $('#frmUsers').hide();
+	                                        if((!divHoaDon.is(':hidden') || !divHoaDon[0].hasAttribute('hidden')) && $('#btnThemOrCapNhat').attr('data-button-hoaDonId') === id)
+	                                            $('#divHoaDon').hide();
 	                                        $this.closest('tr').remove();
 	                                        alert('Xoá thành công!');
 	                                        return true;
 	                                    }
 	                                    else
-	                                        throw new TypeError('Không thể xoá người dùng. Lỗi: ' + data.error);
+	                                        throw new TypeError('Không thể xoá hoá đơn. Lỗi: ' + data.error);
 	                                    return true;
 	                                }
 	                                catch(err)

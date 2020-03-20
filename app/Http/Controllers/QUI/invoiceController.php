@@ -41,6 +41,7 @@ class invoiceController extends Controller
 		    		$tongSanPham += $hoaDonChiTiet->getQuantity();
 		    	$_hoaDon->tongSanPham = number_format($tongSanPham);
 		    	$_hoaDon->tongTien = number_format($hoaDon->getTotalPrice());
+		    	$_hoaDon->ghiChu = $hoaDon->getNote();;
 		    	$danhSachHoaDon[] = $_hoaDon;
 		    }
 		    $request = new \Phuvo\CustomGrpc\Helloworld\GetUserListRequest();
@@ -61,30 +62,88 @@ class invoiceController extends Controller
     	try
     	{
     		$client = NULL;
-    		$request = NULL;
     		$reply = NULL;
     		$status = NULL;
-    		$upImage = NULL;
+    		$order = NULL;
+    		$orderInfor = NULL;
+    		$orderInforDetails = NULL;
+    		$danhSachSanPham = json_decode($req->dsSanPham);
+    		$danhSachSanPhamPush = [];
+    		$_sanPham = NULL;
 
 	    	$client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
 	            'credentials' => \Grpc\ChannelCredentials::createInsecure(),
 	        ]);
-	        // $request = new \Phuvo\CustomGrpc\Helloworld\AddUserRequest();
-         //    $request->setName($req->tenNguoiDung);
-         //    $request->setAge($req->tuoi);
-         //    $request->setEmail($req->email);
-         //    if($req->anhDaiDien)
-         //    {
-         //    	$upImage = new \Phuvo\CustomGrpc\Helloworld\FileUpload();
-         //    	$upImage->setName($req->tenFile);
-         //    	$upImage->setExtension($req->duoiFile);
-         //    	$upImage->setBase64($req->anhDaiDien);
-	        //     $request->setImage($upImage);
-         //    }
-         //    list($reply,$status) = $client->AddUser($request)->wait();
-         //    if($reply->getCode() != 1000)
-         //    	throw new \Exception('Thêm người dùng thất bại');
+	        $order = new \Phuvo\CustomGrpc\Helloworld\AddOrderRequest();
+	        $orderInfor = new \Phuvo\CustomGrpc\Helloworld\AddOrderInfo();
+
+	        $orderInfor->setUserId($req->khachHang);
+	        $orderInfor->setPhone($req->soDienThoai);
+	        $orderInfor->setAddress($req->diaChi);
+	        $orderInfor->setNote($req->ghiChu);
+	        $orderInfor->setStatus($req->trangThai);
+	        foreach($danhSachSanPham as $sanPham)
+	        {
+		        $orderInforDetails = new \Phuvo\CustomGrpc\Helloworld\AddOrderDetailInfo();
+		        $orderInforDetails->setProductId($sanPham->id);
+		        $orderInforDetails->setQuantity($sanPham->soLuong);
+		        $danhSachSanPhamPush[] = $orderInforDetails;
+	        }
+	        
+	        $orderInfor->setAddOrderDetailInfo($danhSachSanPhamPush);
+            $order->setAddOrderInfo($orderInfor);
+            list($reply,$status) = $client->AddOrder($order)->wait();
+            if($reply->getCode() != 1000)
+            	throw new \Exception('Thêm hoá đơn thất bại');
             return response()->json(array('flag' => TRUE, 'id' => $reply->getId()));
+    	}
+    	catch(\Exception $err)
+    	{
+    		return response()->json(array('flag' => FALSE,  'error' => $err->getMessage(), 'line' => $err->getLine()));
+    	}
+    }
+
+    public function layThongTinCapNhat(Request $req)
+    {
+   //  	try
+   //  	{
+	  //   	$client = NULL;
+			// $request = NULL;
+			// $reply = NULL;
+			// $status = NULL;
+			// $user =  NULL;
+
+	  //       $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
+	  //           'credentials' => \Grpc\ChannelCredentials::createInsecure(),
+	  //       ]);
+	  //       $request = new \Phuvo\CustomGrpc\Helloworld\Order();
+	  //       $request->setId($req->id);
+	  //       list($reply,$status) =  $client->ShowUser($request)->wait();
+	  //       if($reply->getCode() != 1000)
+	  //           throw new \Exception('Người dùng không tồn tại');
+	  //       $user = new \stdClass();
+	  //       $user->tenNguoiDung = $reply->getName();
+	  //       $user->tuoi = $reply->getAge();
+	  //       $user->email = $reply->getEmail();
+	  //       return response()->json(array('flag' => TRUE,  'user' => $user));
+	  //   }
+   //  	catch(\Exception $err)
+   //  	{
+   //  		return response()->json(array('flag' => FALSE,  'error' => $err->getMessage()));
+   //  	}
+    }
+    
+    public function xoaHoaDon(Request $request){
+    	try
+    	{
+    		$client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
+            'credentials' => \Grpc\ChannelCredentials::createInsecure(),]);
+	        $deleteRequest = new \Phuvo\CustomGrpc\Helloworld\DeleteOrderRequest();
+	        $deleteRequest->setOrderId($request->id);
+	        list($reply,$status) = $client->DeleteOrder($deleteRequest)->wait();
+	        if($reply->getCode() != 1000)
+            	throw new \Exception('Xoá hoá đơn thất bại');
+            return response()->json(array('flag' => TRUE));
     	}
     	catch(\Exception $err)
     	{

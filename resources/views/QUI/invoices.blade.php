@@ -77,7 +77,7 @@
     			</div>
     			<div class="row">
 		        	<div class="col-md-12">
-				        <h2>Danh sách chi tiết hoá đơn</h2>
+				        <h3>Danh sách chi tiết hoá đơn</h3>
 		        	</div>
 		        </div>
 		        <div class="row">
@@ -104,7 +104,7 @@
         <div class="row">
         	<div class="col-md-3"></div>
         	<div class="col-md-6" style="text-align: center;">
-        		<button id="btnThem" class="btn btn-success">Thêm hoá đơn mới</button>
+        		<button id="btnThem" class="btn btn-success">Mở form thêm hoá đơn mới</button>
         	</div>
         	<div class="col-md-3"></div>
         </div>
@@ -125,6 +125,7 @@
 		                    <th>Địa chỉ</th>
 		                    <th>Tổng số sản phẩm</th>
 		                    <th>Tổng tiền</th>
+		                    <th>Ghi chú</th>
 		                    <th>Thao tác</th>
 		                </tr>
 		            </thead>
@@ -138,6 +139,7 @@
 		                    <td>{{$hoaDon->diaChi}}</td>
 		                    <td>{{$hoaDon->tongSanPham}}</td>
 		                    <td>{{$hoaDon->tongTien.' VNĐ'}}</td>
+		                    <td>{{$hoaDon->ghiChu}}</td>
 		                    <td>
 		                        <div class="btn-group">
 		                            <button type="button" data-button-id="btnXoa" class="btn btn-danger" data-button-hoaDonId="{{$hoaDon->id}}" data-button-khachHang="{{$hoaDon->khachHang}}">Xoá</button>
@@ -164,15 +166,15 @@
 	<!-- Xử lý cho nút thêm mới/cập nhật dữ liệu vào csdl -->
 	@include('js.invoices.2_nut_them_or_capNhat_tren_form')
 	<!-- Xử lý cho nút lấy dữ liệu trên table -->
-	<!-- @include('js.users.3_nut_cap_nhat_tren_table') -->
+	<!-- @include('js.invoices.3_nut_cap_nhat_tren_table') -->
 	<!-- Xử lý cho nút xoá trên table -->
-	<!-- @include('js.users.4_nut_xoa_tren_table') -->
+	@include('js.invoices.4_nut_xoa_tren_table')
 	<!-- Xử lý hiển thị ảnh sau khi chọn -->
-	<!-- @include('js.users.5_xu_ly_hien_thi_anh_sau_khi_chon') -->
+	<!-- @include('js.invoices.5_xu_ly_hien_thi_anh_sau_khi_chon') -->
 	<!-- Xử lý cho sự kiện input textbox khách hàng -->
-	@include('js.invoices.6_xu_ly_su_kien_input_khach_hang');
+	@include('js.invoices.6_xu_ly_su_kien_input_khach_hang')
 	<!-- Xử lý cho sự kiện input textbox sản phẩm -->
-	@include('js.invoices.7_xu_ly_su_kien_input_san_pham');
+	@include('js.invoices.7_xu_ly_su_kien_input_san_pham')
 	<!-- Xử lý cho nút thêm sản phẩm vào hoá đơn -->
-	@include('js.invoices.8_nut_them_san_pham_vao_hoa_don');
+	@include('js.invoices.8_nut_them_san_pham_vao_hoa_don')
 @endsection
