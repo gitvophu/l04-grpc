@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\QUI;
 
-use GPBMetadata\Helloworld;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Phuvo\CustomGrpc\Helloworld\HelloRequest;
 
 class userController extends Controller
 {
@@ -19,7 +17,6 @@ class userController extends Controller
 			$request = NULL;
 			$reply = NULL;
 			$status = NULL;
-			$message = NULL;
 			$danhSachNguoiDung = NULL;
 
 		    $client = new \Phuvo\CustomGrpc\Helloworld\GreeterClient(self::API_HOST, [
@@ -27,9 +24,8 @@ class userController extends Controller
 		    ]);
 		    $request = new \Phuvo\CustomGrpc\Helloworld\GetUserListRequest();
 		    list($reply,$status) = $client->GetUserList($request)->wait();
-		    $message = $reply->getMessage();
-		    $danhSachNguoiDung = json_decode($message,true);
-		    return view('users.users',compact('danhSachNguoiDung'));
+		    $danhSachNguoiDung = json_decode($reply->getMessage(),TRUE);
+		    return view('QUI.users',compact('danhSachNguoiDung'));
     	}
     	catch(\Exception $err)
     	{

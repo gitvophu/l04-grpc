@@ -19,7 +19,7 @@
 	                        $.ajax({
 	                            type: 'POST',
 	                            dataType : 'JSON',
-	                            url: '{{route("xoaNguoiDung")}}',
+	                            url: '{{route("xoaHoaDon")}}',
 	                            xhr: function(){return $.ajaxSettings.xhr();},
 	                            cache: false,
 	                            contentType: false,

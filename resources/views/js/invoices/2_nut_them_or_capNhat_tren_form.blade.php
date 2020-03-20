@@ -6,41 +6,50 @@
         		$('#btnThemOrCapNhat').on('click', function(){
         			try
         			{
-        				var tenNguoiDung = '';
-        				var tuoi = 0;
-        				var email = '';
+        				var khachHang = '';
+        				var soDienThoai = 0;
+        				var diaChi = '';
+        				var ghiChu = '';
+        				var trangThai = 0;
         				var formData = null;
         				var $this = $(this);
         				var cmd = $this.attr('data-button-command');
-        				var _url = '{{route("themNguoiDung")}}';
-        				var anhDaiDien = $('#imgFileAnh').attr('src');
-        				var file = null;
+        				var _url = '{{route("themHoaDon")}}';
+        				var dsSanPham = [];
+        				var dsSanPhamChon = null;
+        				var td = null;
 
-        				tenNguoiDung = $('#txtTenNguoiDung').val();
-        				tuoi = $('#numTuoi').val();
-        				email = $('#txtEmail').val();
-        				if(tenNguoiDung.length > 64 || !tenNguoiDung)
-        					throw new TypeError('Tên người dùng không được rỗng và phải có độ dài nhỏ hơn 64 ký tự!');
-        				if(!tuoi || isNaN(tuoi) || (!isNaN(tuoi) && (tuoi < 18 || tuoi > 70)))
-        					throw new TypeError('Tuổi không được rỗng và phải là số nguyên dương lớn hơn bằng 18 và nhỏ hơn bằng 70!');
-        				if(!checkEmail(email))
-        					throw new TypeError('Email không được rỗng và phải hợp lệ!');
+        				khachHang = $('#hiddenKhachHang');
+        				soDienThoai = $('#numsoDienThoai').val();
+        				diaChi = $('#textareaDiaChi').text();
+        				ghiChu = $('#textareaGhiChu').text();
+        				trangThai = $('#selectTrangThai').val();
+        				if(!khachHang.val())
+        					throw new TypeError('Tên người dùng không được rỗng!');
+        				if(!soDienThoai || isNaN(soDienThoai) || soDienThoai.length != 10)
+        					throw new TypeError('Số điện thoại không được rỗng và phải có 10 chữ số!');
+        				if(!diaChi)
+        					throw new TypeError('Địa chỉ không được rỗng!');
+        				dsSanPhamChon = $('#tbody_id_invoices');
+        				if(!dsSanPhamChon.children().length)
+        					throw new TypeError('Chưa có sản phẩm nào trên hoá đơn!');
+        				$.each(dsSanPhamChon.children(), function(i, v){
+        					td = $(v).children();
+        					dsSanPham.push({'sanPham': td.eq(1).text(), 'soLuong': td.eq(3).text(), 'tongTien': td.eq(5).text().split(' ')[0].split(',').join('')});
+        				});
+        				
         				formData = new FormData();
     					formData.append('_token', $('#_token').attr('content'));
-    					formData.append('tenNguoiDung', tenNguoiDung);
-    					formData.append('tuoi', tuoi);
-    					formData.append('email', email);
-    					if(anhDaiDien)
-    					{
-    						file = $('#fileAnh').prop('files')[0];
-	    					formData.append('', anhDaiDien);
-	    					formData.append('tenFile', file.name.split('.')[0]);
-	    					formData.append('duoiFile', file.name.split('.')[1]);
-    					}
+    					formData.append('khachHang', khachHang);
+    					formData.append('soDienThoai', soDienThoai);
+    					formData.append('diaChi', diaChi);
+    					formData.append('ghiChu', ghiChu);
+    					formData.append('trangThai', trangThai);
+    					formData.append('dsSanPham', JSON.stringify(dsSanPham));
         				if(cmd === 'capnhat')
         				{
-        					formData.append('id', $this.attr('data-button-userId'));
-        					_url = '{{route("capNhatNguoiDung")}}';
+        					formData.append('id', $this.attr('data-button-hoaDonId'));
+        					_url = '{{route("capNhatHoaDon")}}';
         				}
         				$.ajax({
         					type: 'POST',
@@ -55,6 +64,7 @@
 	                        {
 	                            try
 	                            {
+	                            	// $('#err').html(data);
 	                            	var tr = null;
 	                            	var td = null;
 	                            	var button = null;
@@ -63,33 +73,26 @@
 	                                if(data.flag)
 	                                {
 	                                	if(cmd === 'capnhat')
-	                                	{
-	                                		button = $('#tbody_id_users').children().find('[data-button-userId="' + $this.attr('data-button-userId') + '"][data-button-id="btnSua"]');
-			                            	tr = button.parent().closest('tr');
-			                            	td = tr.children();
-	                                		td.eq(2).text(tenNguoiDung);
-	                                		td.eq(3).text(tuoi);
-	                                		td.eq(4).text(email);
-	                                		$('[data-button-id="btnXoa"][data-button-userId="' + $this.attr('data-button-userId') + '"]').attr('data-button-userName', tenNguoiDung);
-	                                	}
+	                                	{}
 	                                	else
 	                                	{
-	                                		tbody = $('#tbody_id_users');
+	                                		tbody = $('#tbody_id_invoices');
 	                                		tbody.append('<tr>\
 							                    <td>' + (tbody.children().length + 1) + '</td>\
 							                    <td>' + data.id + '</td>\
-							                    <td>' + tenNguoiDung + '</td>\
-							                    <td>' + tuoi + '</td>\
-							                    <td>' + email + '</td>\
+							                    <td>' + khachHang.attr('data-hidden-tenKhachHang') + '</td>\
+							                    <td>' + soDienThoai + '</td>\
+							                    <td>' + diaChi + '</td>\
 							                    <td>' + (anhDaiDien ? '<img src="' + anhDaiDien + '" alt="Ảnh đại diện">' : 'Chưa cập nhật') + '</td>\
 							                    <td>\
 							                        <div class="btn-group">\
-							                            <button data-button-id="btnXoa" class="btn btn-danger" data-button-userId="' + data.id + '" data-button-userName="' + tenNguoiDung + '">Xoá</button>\
-							                            <button data-button-id="btnSua" class="btn btn-info" data-button-userId="' + data.id + '">Sửa</button>\
+							                            <button data-button-id="btnXoa" class="btn btn-danger" data-button-hoaDonId="' + data.id + '" data-button-userName="' + khachHang + '">Xoá</button>\
+							                            <button data-button-id="btnSua" class="btn btn-info" data-button-hoaDonId="' + data.id + '">Sửa</button>\
 							                        </div>\
 							                    </td>\
 							                </tr>');
 	                                	}
+		                                    
 						                alert((cmd === 'capnhat' ? 'Cập nhật' : 'Thêm') + ' thành công!');
 	                                }
 	                                else
@@ -103,7 +106,7 @@
 	                            }
 	                        },
 	                        error: function(jqXHR, textStatus, errorThrown){
-	                            alert(jqXHR.responseText);
+	                            $('#err').html(jqXHR.responseText);
 	                            return false;
 	                        }
         				});

@@ -26,6 +26,9 @@
           <ul class="nav navbar-nav">
             <li class="{{url()->current() == url('nguoiDung')?'active':''}}"><a href="{{url('nguoiDung')}}">Quản lý người dùng</a></li>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="{{url()->current() == url('hoaDon')?'active':''}}"><a href="{{url('hoaDon')}}">Quản lý hoá đơn (QUÍ)</a></li>
+          </ul>
         </div>
       </nav>
     @yield('content')

@@ -76,7 +76,7 @@
                     <td>{{$nguoiDung['id']}}</td>
                     <td>{{$nguoiDung['name']}}</td>
                     <td>{{$nguoiDung['age']}}</td>
-                    <td>${{$nguoiDung['email']}}</td>
+                    <td>{{$nguoiDung['email']}}</td>
                     <td>@if($nguoiDung['image'])<img src="{{$nguoiDung['image']}}" alt="Ảnh đại diện">@else Chưa cập nhật @endif</td>
                     <td>
                         <div class="btn-group">

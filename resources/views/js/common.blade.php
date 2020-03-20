@@ -1,4 +1,15 @@
 <script>
+	//định dạng số
+	function addCommas(numberString) {
+      var resultString = numberString + '';
+      var x = resultString.split('.');
+      var x1 = x[0];
+      var x2 = x.length > 1 ? '.' + x[1] : '';
+      var rgxp = /(\d+)(\d{3})/;
+      while (rgxp.test(x1))
+        x1 = x1.replace(rgxp, '$1' + ',' + '$2');
+      return x1 + x2;
+    }
 	//check email in form
 	function checkEmail(email)
 	{
