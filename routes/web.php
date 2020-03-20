@@ -33,7 +33,7 @@ Route::post('/nguoiDung/xoa', 'QUI\\userController@xoaNguoiDung')->name('xoaNguo
 Route::post('/nguoiDung/capNhat', 'QUI\\userController@capNhatNguoiDung')->name('capNhatNguoiDung');
 
 Route::get('/hoaDon', 'QUI\\invoiceController@layDanhSachHoaDon');
-Route::post('/nguoiDung/layThongTinCapNhat', 'QUI\\invoiceController@layThongTinCapNhat')->name('layThongTinCapNhatHoaDon');
+Route::post('/hoaDon/layThongTinCapNhat', 'QUI\\invoiceController@layThongTinCapNhat')->name('layThongTinCapNhatHoaDon');
 Route::post('/hoaDon/them', 'QUI\\invoiceController@themHoaDon')->name('themHoaDon');
 Route::post('/hoaDon/capNhat', 'QUI\\invoiceController@capNhatHoaDon')->name('capNhatHoaDon');
 Route::post('/hoaDon/xoa', 'QUI\\invoiceController@xoaHoaDon')->name('xoaHoaDon');
