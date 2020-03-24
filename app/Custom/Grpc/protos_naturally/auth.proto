@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package NaturallyGrpc.Auth;
+
+
+// The greeting service definition.
+service AuthService {
+    // Sends a greeting
+    rpc Login(LoginRequest) returns (LoginResponse){}
+    rpc GetLoginViewData(GetLoginViewDataRequest) returns (GetLoginViewDataResponse){}
+}
+
+message LoginRequest{
+    string FLPNo = 1;
+    string password =2 ;
+    string dccode = 3;
+}
+message LoginResponse{
+    int32 code = 1;
+    string message = 2;
+    string access_token = 3;
+}
+// view data form
+message GetLoginViewDataRequest{
+
+}
+message GetLoginViewDataResponse{
+    int32 code = 1;
+    string message = 2;
+    string data = 3;
+}
